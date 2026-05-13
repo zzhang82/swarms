@@ -13,6 +13,7 @@ from swarms.utils.history_output_formatter import (
 )
 from swarms.utils.loguru_logger import initialize_logger
 from swarms.utils.output_types import OutputType
+from swarms.telemetry.otel_wrapper import trace_span
 
 logger = initialize_logger(log_folder="mixture_of_agents")
 
@@ -194,6 +195,7 @@ class MixtureOfAgents:
             conversation=self.conversation, type=self.output_type
         )
 
+    @trace_span("MixtureOfAgents.run")
     def run(
         self,
         task: str,

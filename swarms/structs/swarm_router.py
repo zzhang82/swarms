@@ -42,6 +42,7 @@ from swarms.utils.swarm_autosave import (
     autosave_swarm,
     get_swarm_workspace_dir,
 )
+from swarms.telemetry.otel_wrapper import trace_span
 
 logger = initialize_logger(log_folder="swarm_router")
 
@@ -823,6 +824,7 @@ class SwarmRouter:
             )
             raise e
 
+    @trace_span("SwarmRouter.run")
     def run(
         self,
         task: Optional[str] = None,
